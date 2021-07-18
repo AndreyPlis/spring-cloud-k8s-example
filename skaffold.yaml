@@ -1,0 +1,50 @@
+apiVersion: skaffold/v2beta8
+kind: Config
+
+metadata:
+  name: hello-world
+
+build:
+  artifacts:
+  - image: hello-world
+    context: .
+    jib:
+        project:  service
+
+deploy:
+  kustomize:
+    paths:
+    - kustomization/base
+
+profiles:
+  # Local cluster - we build and deploy things locally
+  - name: local
+    build:
+      local:
+        push: false
+    activation:
+      - kubeContext: docker-desktop
+portForward:
+  - resourceType: service
+    resourceName: hello-world-svc
+    port: 8080
+  - resourceType: statefulset
+    resourceName: kafka-1
+    port: 9092
+  - resourceType: statefulset
+    resourceName: postgres
+    port: 5432
+    localPort: 5433
+  - resourceType: statefulset
+    resourceName: redis
+    port: 6379
+  - resourceType: statefulset
+    resourceName: zookeeper-1
+    port: 2181
+  - resourceType: statefulset
+    resourceName: zookeeper-1
+    port: 2888
+  - resourceType: statefulset
+    resourceName: zookeeper-1
+    port: 3888
+
