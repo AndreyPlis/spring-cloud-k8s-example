@@ -10,7 +10,6 @@ pluginManagement {
         id("org.springframework.boot") version "2.4.5"
         id ("io.spring.dependency-management") version "1.0.11.RELEASE"
         id ("io.spring.gradle") version "1.0.11.RELEASE"
-        id ("org.springframework.boot") version "2.4.5"
         id ("com.google.cloud.tools.jib") version "3.1.2"
 
     }
