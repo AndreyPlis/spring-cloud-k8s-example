@@ -10,10 +10,9 @@ class Controller(val discoveryClient: DiscoveryClient) {
 
 
     @GetMapping("hello")
-    fun hello(): String = "hell"
+    fun hello(): String = "hello"
 
     @GetMapping("services")
-    fun services(): List<String> {
-        return discoveryClient.services
-    }
+    fun services(): List<String> = discoveryClient.services
+
 }
